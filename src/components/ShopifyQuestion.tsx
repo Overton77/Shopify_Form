@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import type { ShopifyFormData } from "@/types/formType";
+
 import {
   Card,
   CardContent,
@@ -27,7 +27,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export default function ShopifyQuestionnaire() {
   const [step, setStep] = useState(1);
-  const { control, handleSubmit, watch } = useForm<ShopifyFormData>({
+  const { control, handleSubmit, watch } = useForm<any | undefined>({
     defaultValues: {
       businessName: "",
       businessType: "",
@@ -61,7 +61,7 @@ export default function ShopifyQuestionnaire() {
   const totalSteps = interestedInMarketing ? 8 : 7;
   const progress = (step / totalSteps) * 100;
 
-  const onSubmit = async (data: ShopifyFormData) => {
+  const onSubmit = async (data: any | undefined) => {
     console.log("Form Data:", data);
     try {
       const response = await fetch("/api/submit-form", {
