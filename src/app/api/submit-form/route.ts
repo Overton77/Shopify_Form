@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import type { ShopifyFormData } from "@/types/formType";
 
 const prisma = new PrismaClient();
 
 // Define the POST method
 export async function POST(req: NextRequest) {
   try {
-    const data = await req.json();
+    const data: ShopifyFormData = await req.json();
+
+    console.log(data);
 
     // Create a new FormResponse record in the database
     const newFormResponse = await prisma.formResponse.create({

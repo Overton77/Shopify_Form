@@ -1,4 +1,4 @@
-export type FormData = {
+export type ShopifyFormData = {
   businessName: string;
   businessType?: string;
   businessDescription?: string;
