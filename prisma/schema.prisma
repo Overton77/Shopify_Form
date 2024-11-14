@@ -1,0 +1,40 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model FormResponse {
+  id                     Int        @id @default(autoincrement())
+  businessName           String
+  businessType           String?
+  businessDescription    String?
+  websitePurpose         String?
+  desiredFeatures        String[]   @default([])
+  designPreferences      String?
+  customerDescription    String?
+  customerLocations      String[]   @default([])
+  customerAgeGroups      String[]   @default([])
+  productOfferings       String?
+  productCount           Int?
+  hasProductDetails      String?    // Changed from Boolean to String
+  hasExistingBranding    String?    // Changed from Boolean to String
+  brandingDescription    String?
+  contentReadiness       String?
+  needsContentHelp       Boolean?
+  interestedInMarketing  Boolean?
+  marketingGoals         String[]   @default([])
+  marketingChannels      String[]   @default([])
+  currentMarketingTools  String?
+  desiredLaunchDate      DateTime?
+  budgetEstimate         String?
+  challenges             String?
+  additionalInfo         String?
+  createdAt              DateTime   @default(now())
+  updatedAt              DateTime   @updatedAt
+}

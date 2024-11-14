@@ -1,0 +1,33 @@
+-- CreateTable
+CREATE TABLE "FormResponse" (
+    "id" SERIAL NOT NULL,
+    "businessName" TEXT NOT NULL,
+    "businessType" TEXT,
+    "businessDescription" TEXT,
+    "customerDescription" TEXT,
+    "customerLocations" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "customerAgeGroups" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "productOfferings" TEXT,
+    "productCount" INTEGER,
+    "hasProductDescriptions" BOOLEAN,
+    "productOptions" TEXT,
+    "hasExistingBranding" BOOLEAN,
+    "brandingDescription" TEXT,
+    "preferredWebsites" TEXT,
+    "preferredStyles" TEXT,
+    "desiredFeatures" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "customFeatures" TEXT,
+    "contentReadiness" JSONB,
+    "needsContentHelp" BOOLEAN,
+    "desiredLaunchDate" TIMESTAMP(3),
+    "budgetEstimate" INTEGER,
+    "marketingGoals" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "marketingServices" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "marketingTools" TEXT,
+    "challenges" TEXT,
+    "additionalInfo" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "FormResponse_pkey" PRIMARY KEY ("id")
+);
