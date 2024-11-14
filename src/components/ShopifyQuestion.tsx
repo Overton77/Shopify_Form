@@ -57,7 +57,7 @@ export default function ShopifyQuestionnaire() {
     mode: "onChange",
   });
 
-  const [interestedInMarketing, setInterestedInMarketing] = useState(false)
+  const [interestedInMarketing, setInterestedInMarketing] = useState(false);
   const totalSteps = interestedInMarketing ? 8 : 7;
   const progress = (step / totalSteps) * 100;
 
@@ -208,9 +208,9 @@ export default function ShopifyQuestionnaire() {
                         checked={field.value?.includes(feature)}
                         onCheckedChange={(checked) => {
                           const updated = checked
-                            ? [...(field.value ?? []), loc]
+                            ? [...(field.value ?? []), feature]
                             : [...(field.value ?? [])].filter(
-                                (val) => val !== loc
+                                (val) => val !== feature
                               );
                           field.onChange(updated);
                         }}
@@ -473,7 +473,6 @@ export default function ShopifyQuestionnaire() {
               )}
             />
 
-            
             {interestedInMarketing && (
               <>
                 <Label className="mt-4">Marketing Goals</Label>
@@ -629,7 +628,7 @@ export default function ShopifyQuestionnaire() {
         <div className="w-full bg-gray-300 rounded-full h-2.5 mt-2">
           <div
             className="bg-blue-600 h-2.5 rounded-full"
-            style={{ width: ${progress}% }}
+            style={{ width: `${progress}%` }}
           />
         </div>
       </CardHeader>
