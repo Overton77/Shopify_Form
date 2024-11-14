@@ -1,0 +1,26 @@
+export type FormData = {
+  businessName: string;
+  businessType?: string;
+  businessDescription?: string;
+  websitePurpose?: string;
+  desiredFeatures?: string[];
+  designPreferences?: string;
+  customerDescription?: string;
+  customerLocations?: string[];
+  customerAgeGroups?: string[];
+  productOfferings?: string;
+  productCount?: string;
+  hasProductDetails?: string;
+  hasExistingBranding?: string;
+  brandingDescription?: string;
+  contentReadiness?: string;
+  needsContentHelp?: boolean;
+  interestedInMarketing?: boolean;
+  marketingGoals?: string[];
+  marketingChannels?: string[];
+  currentMarketingTools?: string;
+  desiredLaunchDate?: string;
+  budgetEstimate?: string;
+  challenges?: string;
+  additionalInfo?: string;
+};

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"; 
+import type { FormData } from "@/types/formType";
 import {
   Card,
   CardContent,
@@ -38,7 +39,7 @@ export default function ShopifyQuestionnaire() {
   const totalSteps = interestedInMarketing ? 8 : 7;
   const progress = (step / totalSteps) * 100;
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: FormData) => {
     console.log("Form Data:", data);
     try {
       const response = await fetch("/api/submit-form", {
