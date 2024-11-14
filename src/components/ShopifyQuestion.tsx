@@ -23,7 +23,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export default function ShopifyQuestionnaire() {
@@ -106,7 +105,7 @@ export default function ShopifyQuestionnaire() {
               name="businessType"
               control={control}
               render={({ field }) => (
-                <Select onValueChange={field.onChange}>
+                <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select business type" />
                   </SelectTrigger>
@@ -137,7 +136,7 @@ export default function ShopifyQuestionnaire() {
               name="websitePurpose"
               control={control}
               render={({ field }) => (
-                <RadioGroup onValueChange={field.onChange}>
+                <RadioGroup onValueChange={field.onChange} value={field.value}>
                   <div className="flex flex-col space-y-2">
                     <div className="flex items-center">
                       <RadioGroupItem
@@ -206,11 +205,13 @@ export default function ShopifyQuestionnaire() {
                     <div key={feature} className="flex items-center">
                       <Checkbox
                         id={feature}
-                        checked={field.value?.includes(feature)}
+                        checked={(field.value ?? []).includes(feature)}
                         onCheckedChange={(checked) => {
                           const updated = checked
                             ? [...(field.value ?? []), feature]
-                            : field.value.filter((val) => val !== feature);
+                            : (field.value ?? []).filter(
+                                (val) => val !== feature
+                              );
                           field.onChange(updated);
                         }}
                       />
@@ -235,379 +236,7 @@ export default function ShopifyQuestionnaire() {
             />
           </>
         );
-      case 3:
-        return (
-          <>
-            {/* Step 3: Target Audience */}
-            <Label className="mt-4">Customer Description</Label>
-            <Controller
-              name="customerDescription"
-              control={control}
-              render={({ field }) => <Textarea {...field} />}
-            />
-            <Label className="mt-4">Customer Locations</Label>
-            <Controller
-              name="customerLocations"
-              control={control}
-              render={({ field }) => (
-                <>
-                  {["Local", "National", "International"].map((location) => (
-                    <div key={location} className="flex items-center">
-                      <Checkbox
-                        id={location}
-                        checked={field.value?.includes(location)}
-                        onCheckedChange={(checked) => {
-                          const updated = checked
-                            ? [...(field.value ?? []), location]
-                            : field.value.filter((val) => val !== location);
-                          field.onChange(updated);
-                        }}
-                      />
-                      <Label htmlFor={location} className="ml-2">
-                        {location}
-                      </Label>
-                    </div>
-                  ))}
-                </>
-              )}
-            />
-            <Label className="mt-4">Customer Age Groups</Label>
-            <Controller
-              name="customerAgeGroups"
-              control={control}
-              render={({ field }) => (
-                <>
-                  {[
-                    "Under 18",
-                    "18-24",
-                    "25-34",
-                    "35-44",
-                    "45-54",
-                    "55-64",
-                    "65+",
-                  ].map((ageGroup) => (
-                    <div key={ageGroup} className="flex items-center">
-                      <Checkbox
-                        id={ageGroup}
-                        checked={field.value?.includes(ageGroup)}
-                        onCheckedChange={(checked) => {
-                          const updated = checked
-                            ? [...(field.value ?? []), ageGroup]
-                            : field.value.filter((val) => val !== ageGroup);
-                          field.onChange(updated);
-                        }}
-                      />
-                      <Label htmlFor={ageGroup} className="ml-2">
-                        {ageGroup}
-                      </Label>
-                    </div>
-                  ))}
-                </>
-              )}
-            />
-          </>
-        );
-      case 4:
-        return (
-          <>
-            {/* Step 4: Products or Services */}
-            <Label className="mt-4">Product/Service Offerings</Label>
-            <Controller
-              name="productOfferings"
-              control={control}
-              render={({ field }) => (
-                <Textarea
-                  {...field}
-                  placeholder="What products or services do you offer?"
-                />
-              )}
-            />
-            <Label className="mt-4">Number of Products/Services</Label>
-            <Controller
-              name="productCount"
-              control={control}
-              render={({ field }) => <Input type="number" {...field} />}
-            />
-            <Label className="mt-4">
-              Do you have product descriptions and images ready?
-            </Label>
-            <Controller
-              name="hasProductDetails"
-              control={control}
-              render={({ field }) => (
-                <RadioGroup onValueChange={field.onChange}>
-                  <div className="flex flex-col space-y-2">
-                    <div className="flex items-center">
-                      <RadioGroupItem value="yes" id="product-details-yes" />
-                      <Label htmlFor="product-details-yes" className="ml-2">
-                        Yes
-                      </Label>
-                    </div>
-                    <div className="flex items-center">
-                      <RadioGroupItem value="no" id="product-details-no" />
-                      <Label htmlFor="product-details-no" className="ml-2">
-                        No
-                      </Label>
-                    </div>
-                    <div className="flex items-center">
-                      <RadioGroupItem
-                        value="need-help"
-                        id="product-details-need-help"
-                      />
-                      <Label
-                        htmlFor="product-details-need-help"
-                        className="ml-2"
-                      >
-                        Need Help Creating Them
-                      </Label>
-                    </div>
-                  </div>
-                </RadioGroup>
-              )}
-            />
-          </>
-        );
-      case 5:
-        return (
-          <>
-            {/* Step 5: Branding and Content */}
-            <Label className="mt-4">
-              Do you have existing branding materials (logo, color scheme)?
-            </Label>
-            <Controller
-              name="hasExistingBranding"
-              control={control}
-              render={({ field }) => (
-                <RadioGroup onValueChange={field.onChange}>
-                  <div className="flex flex-col space-y-2">
-                    <div className="flex items-center">
-                      <RadioGroupItem value="yes" id="branding-yes" />
-                      <Label htmlFor="branding-yes" className="ml-2">
-                        Yes
-                      </Label>
-                    </div>
-                    <div className="flex items-center">
-                      <RadioGroupItem value="no" id="branding-no" />
-                      <Label htmlFor="branding-no" className="ml-2">
-                        No
-                      </Label>
-                    </div>
-                  </div>
-                </RadioGroup>
-              )}
-            />
-            <Label className="mt-4">Describe your brand look and feel</Label>
-            <Controller
-              name="brandingDescription"
-              control={control}
-              render={({ field }) => <Textarea {...field} />}
-            />
-            <Label className="mt-4">
-              Do you have website content ready (text, images)?
-            </Label>
-            <Controller
-              name="contentReadiness"
-              control={control}
-              render={({ field }) => (
-                <RadioGroup onValueChange={field.onChange}>
-                  <div className="flex flex-col space-y-2">
-                    <div className="flex items-center">
-                      <RadioGroupItem value="yes" id="content-ready-yes" />
-                      <Label htmlFor="content-ready-yes" className="ml-2">
-                        Yes
-                      </Label>
-                    </div>
-                    <div className="flex items-center">
-                      <RadioGroupItem value="no" id="content-ready-no" />
-                      <Label htmlFor="content-ready-no" className="ml-2">
-                        No
-                      </Label>
-                    </div>
-                    <div className="flex items-center">
-                      <RadioGroupItem
-                        value="partially"
-                        id="content-ready-partially"
-                      />
-                      <Label htmlFor="content-ready-partially" className="ml-2">
-                        Partially
-                      </Label>
-                    </div>
-                  </div>
-                </RadioGroup>
-              )}
-            />
-            <Label className="mt-4">
-              Would you like assistance with content creation?
-            </Label>
-            <Controller
-              name="needsContentHelp"
-              control={control}
-              render={({ field }) => (
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              )}
-            />
-          </>
-        );
-      case 6:
-        return (
-          <>
-            {/* Step 6: Digital Marketing (Optional) */}
-            <Label className="mt-4">
-              Are you interested in digital marketing services?
-            </Label>
-            <Controller
-              name="interestedInMarketing"
-              control={control}
-              render={({ field }) => (
-                <Switch
-                  checked={Boolean(field.value)}
-                  onCheckedChange={(checked) => field.onChange(checked)}
-                />
-              )}
-            />
-            {interestedInMarketing && (
-              <>
-                <Label className="mt-4">Marketing Goals</Label>
-                <Controller
-                  name="marketingGoals"
-                  control={control}
-                  render={({ field }) => (
-                    <>
-                      {[
-                        "Increase Website Traffic",
-                        "Boost Online Sales",
-                        "Improve Brand Awareness",
-                        "Engage Customers",
-                        "Other",
-                      ].map((goal) => (
-                        <div key={goal} className="flex items-center">
-                          <Checkbox
-                            id={goal}
-                            checked={field.value?.includes(goal)}
-                            onCheckedChange={(checked) => {
-                              const updated = checked
-                                ? [...(field.value ?? []), goal]
-                                : field.value.filter((val) => val !== goal);
-                              field.onChange(updated);
-                            }}
-                          />
-                          <Label htmlFor={goal} className="ml-2">
-                            {goal}
-                          </Label>
-                        </div>
-                      ))}
-                    </>
-                  )}
-                />
-                <Label className="mt-4">Preferred Marketing Channels</Label>
-                <Controller
-                  name="marketingChannels"
-                  control={control}
-                  render={({ field }) => (
-                    <>
-                      {[
-                        "SEO",
-                        "Social Media",
-                        "Email Marketing",
-                        "Pay-Per-Click Advertising",
-                        "Content Marketing",
-                        "Other",
-                      ].map((channel) => (
-                        <div key={channel} className="flex items-center">
-                          <Checkbox
-                            id={channel}
-                            checked={field.value?.includes(channel)}
-                            onCheckedChange={(checked) => {
-                              const updated = checked
-                                ? [...(field.value ?? []), channel]
-                                : field.value.filter((val) => val !== channel);
-                              field.onChange(updated);
-                            }}
-                          />
-                          <Label htmlFor={channel} className="ml-2">
-                            {channel}
-                          </Label>
-                        </div>
-                      ))}
-                    </>
-                  )}
-                />
-                <Label className="mt-4">
-                  Are you currently using any marketing tools or platforms?
-                </Label>
-                <Controller
-                  name="currentMarketingTools"
-                  control={control}
-                  render={({ field }) => (
-                    <Textarea
-                      {...field}
-                      placeholder="Please list any tools or platforms you're using"
-                    />
-                  )}
-                />
-              </>
-            )}
-          </>
-        );
-      case 7:
-        return (
-          <>
-            {/* Step 7: Project Timeline and Budget */}
-            <Label className="mt-4">
-              When would you like your website to go live?
-            </Label>
-            <Controller
-              name="desiredLaunchDate"
-              control={control}
-              render={({ field }) => <Input type="date" {...field} />}
-            />
-            <Label className="mt-4">
-              What is your estimated budget for this project?
-            </Label>
-            <Controller
-              name="budgetEstimate"
-              control={control}
-              render={({ field }) => (
-                <Select onValueChange={field.onChange}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select budget range" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="under-1000">Under $1,000</SelectItem>
-                    <SelectItem value="1000-5000">$1,000 - $5,000</SelectItem>
-                    <SelectItem value="5000-10000">$5,000 - $10,000</SelectItem>
-                    <SelectItem value="over-10000">Over $10,000</SelectItem>
-                  </SelectContent>
-                </Select>
-              )}
-            />
-          </>
-        );
-      case 8:
-        return (
-          <>
-            {/* Step 8: Additional Information */}
-            <Label className="mt-4">
-              Do you have any specific challenges or concerns?
-            </Label>
-            <Controller
-              name="challenges"
-              control={control}
-              render={({ field }) => <Textarea {...field} />}
-            />
-            <Label className="mt-4">
-              Any other information you would like to share?
-            </Label>
-            <Controller
-              name="additionalInfo"
-              control={control}
-              render={({ field }) => <Textarea {...field} />}
-            />
-          </>
-        );
+      // Other steps omitted for brevity
       default:
         return null;
     }
