@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Button } from "@/components/ui/button"; 
+import { Button } from "@/components/ui/button";
 import type { FormData } from "@/types/formType";
 import {
   Card,
@@ -28,9 +28,32 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export default function ShopifyQuestionnaire() {
   const [step, setStep] = useState(1);
-  const { control, handleSubmit, watch } = useForm({
+  const { control, handleSubmit, watch } = useForm<FormData>({
     defaultValues: {
+      businessName: "",
+      businessType: "",
+      businessDescription: "",
+      websitePurpose: "",
+      desiredFeatures: [],
+      designPreferences: "",
+      customerDescription: "",
+      customerLocations: [],
+      customerAgeGroups: [],
+      productOfferings: "",
+      productCount: "",
+      hasProductDetails: "",
+      hasExistingBranding: "",
+      brandingDescription: "",
+      contentReadiness: "",
+      needsContentHelp: false,
       interestedInMarketing: false,
+      marketingGoals: [],
+      marketingChannels: [],
+      currentMarketingTools: "",
+      desiredLaunchDate: "",
+      budgetEstimate: "",
+      challenges: "",
+      additionalInfo: "",
     },
     mode: "onChange",
   });
