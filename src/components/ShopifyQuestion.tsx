@@ -38,7 +38,7 @@ export default function ShopifyQuestionnaire() {
   const totalSteps = interestedInMarketing ? 8 : 7;
   const progress = (step / totalSteps) * 100;
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     console.log("Form Data:", data);
     try {
       const response = await fetch("/api/submit-form", {
