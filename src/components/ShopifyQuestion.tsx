@@ -371,7 +371,7 @@ export default function ShopifyQuestionnaire() {
                 </RadioGroup>
               )}
             />
-            <Label className="mt-4">Describe your brand's look and feel</Label>
+            <Label className="mt-4">Describe your brand look and feel</Label>
             <Controller
               name="brandingDescription"
               control={control}
@@ -574,7 +574,7 @@ export default function ShopifyQuestionnaire() {
               render={({ field }) => <Textarea {...field} />}
             />
             <Label className="mt-4">
-              Any other information you'd like to share?
+              Any other information you would like to share?
             </Label>
             <Controller
               name="additionalInfo"
