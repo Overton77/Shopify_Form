@@ -5,6 +5,7 @@
       "warn",
       { "argsIgnorePattern": "^_" }
     ],
+    "@typescript-eslint/no-require-imports": "off",
     "react/no-unescaped-entities": "off"
   }
 }

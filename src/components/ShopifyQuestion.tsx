@@ -31,6 +31,7 @@ export default function ShopifyQuestionnaire() {
     defaultValues: {
       interestedInMarketing: false,
     },
+    mode: "onChange",
   });
 
   const interestedInMarketing = watch("interestedInMarketing");
@@ -438,8 +439,8 @@ export default function ShopifyQuestionnaire() {
               control={control}
               render={({ field }) => (
                 <Switch
-                  checked={!!field.value}
-                  onCheckedChange={field.onChange}
+                  checked={Boolean(field.value)}
+                  onCheckedChange={(checked) => field.onChange(checked)}
                 />
               )}
             />
